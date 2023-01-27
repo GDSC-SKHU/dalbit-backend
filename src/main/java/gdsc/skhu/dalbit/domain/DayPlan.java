@@ -17,10 +17,11 @@ import java.util.List;
 @NoArgsConstructor
 public class DayPlan {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "dayplan_id", nullable = false)
     private Long id;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
@@ -36,6 +37,9 @@ public class DayPlan {
     @Column
     private int totalSpentMoney;
 
+    @OneToOne(mappedBy = "dayPlan")
+    private Record record;
+
     @OneToMany(mappedBy = "dayPlan")
-    private List<Memo> memos = new ArrayList<>();
+    private List<Expenditure> expenditures = new ArrayList<>();
 }
