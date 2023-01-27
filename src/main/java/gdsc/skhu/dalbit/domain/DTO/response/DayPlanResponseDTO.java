@@ -5,11 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Builder
 @Data
 public class DayPlanResponseDTO {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
-    LocalDate localDate;
-    int limitMoney;
+    private LocalDate localDate;
+    private int limitMoney;
+    private List<MemoResponseDTO> memos;
 }

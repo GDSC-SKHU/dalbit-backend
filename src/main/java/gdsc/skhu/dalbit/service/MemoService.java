@@ -20,7 +20,6 @@ import java.util.Locale;
 @Service
 @RequiredArgsConstructor
 public class MemoService {
-
     private final MemoRepository memoRepository;
     private final DayPlanRepository dayPlanRepository;
     private final MemberRepository memberRepository;
@@ -28,7 +27,7 @@ public class MemoService {
     public void saveMemo(Principal principal,MemoRequestDTO memoRequestDTO) {
         String name = principal.getName();
         Member member = memberRepository.findByUsername(name).get();
-        DayPlan dayPlan = dayPlanRepository.findByMemberAndLocalDate(member, memoRequestDTO.getDate()).orElseThrow(() -> new IllegalArgumentException());
+        DayPlan dayPlan = dayPlanRepository.findByMemberAndLocalDate(member, memoRequestDTO.getLocalDate()).orElseThrow(IllegalArgumentException::new);
         memoRepository.save(Memo.builder()
                 .dayPlan(dayPlan)
                 .message(memoRequestDTO.getMessage())

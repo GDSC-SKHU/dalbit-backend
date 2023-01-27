@@ -21,11 +21,9 @@ import java.util.Locale;
 public class MemoController {
     private final MemoService memoService;
 
-
-
     @PostMapping("/memos")
     public ResponseEntity<String> saveMemo(Principal principal, @RequestBody MemoRequestDTO memoRequestDTO) {
-        memoService.saveMemo(principal,memoRequestDTO);
+        memoService.saveMemo(principal, memoRequestDTO);
         return ResponseEntity.ok("저장성공");
     }
 }

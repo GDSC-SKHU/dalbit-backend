@@ -1,13 +1,14 @@
 package gdsc.skhu.dalbit.domain.DTO.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Getter;
+import lombok.Data;
 
 import java.time.LocalDate;
-@Getter
+
+@Data
 public class MemoRequestDTO {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
-    LocalDate date;
-    String message;
-    int spentMoney;
+    private LocalDate localDate;
+    private String message;
+    private int spentMoney;
 }

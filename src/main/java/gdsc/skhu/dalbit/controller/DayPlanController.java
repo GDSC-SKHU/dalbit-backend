@@ -17,8 +17,14 @@ public class DayPlanController {
     private final DayPlanService dayPlanService;
 
     @PostMapping("/dayplans")
-    public ResponseEntity<DayPlanResponseDTO> saveDayPlan(Principal principal, @RequestBody  DayPlanRequestDTO dayPlanRequestDTO) {
+    public ResponseEntity<DayPlanResponseDTO> saveDayPlan(Principal principal, @RequestBody DayPlanRequestDTO dayPlanRequestDTO) {
         DayPlanResponseDTO dayPlanResponseDTO = dayPlanService.saveDayPlan(principal,dayPlanRequestDTO);
+        return ResponseEntity.ok(dayPlanResponseDTO);
+    }
+
+    @GetMapping("/dayplans")
+    public ResponseEntity<DayPlanResponseDTO> updateDayPlan(Principal principal, @RequestBody DayPlanRequestDTO dayPlanRequestDTO) {
+        DayPlanResponseDTO dayPlanResponseDTO = dayPlanService.updateDayPlan(principal,dayPlanRequestDTO);
         return ResponseEntity.ok(dayPlanResponseDTO);
     }
 }

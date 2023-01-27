@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Data
 public class DayPlanRequestDTO {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
-    LocalDate localDate;
-    int limitMoney;
-
+    private LocalDate localDate;
+    private int limitMoney;
+    private Long id;
 }

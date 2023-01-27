@@ -13,5 +13,6 @@ import java.util.List;
 @Data
 @Builder
 public class MemoResponseDTO {
-    DayPlan dayPlan;
+    private String message;
+    private int spentMoney;
 }
