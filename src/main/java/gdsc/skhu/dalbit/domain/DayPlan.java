@@ -21,6 +21,7 @@ public class DayPlan {
     @Column(name = "dayplan_id", nullable = false)
     private Long id;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
@@ -33,6 +34,9 @@ public class DayPlan {
     @Column
     private int limitMoney;
 
+    @OneToOne(mappedBy = "dayPlan")
+    private Record record;
+
     @OneToMany(mappedBy = "dayPlan")
-    private List<Memo> memos = new ArrayList<>();
+    private List<Expenditure> expenditures = new ArrayList<>();
 }
