@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.Id;
+import java.security.Principal;
 import java.time.LocalDate;
 import java.util.Optional;
 
@@ -26,19 +27,9 @@ public class DayPlanService {
     private final DayPlanRepository dayPlanRepository;
     private final MemberRepository memberRepository;
 
-    public void checkLimitMoney(Long MemberId, LocalDate localDate, int limitMoney) {
-        DayPlan dayPlan = dayPlanRepository.findById(1L).orElseThrow(() -> new IllegalArgumentException());
-        int totalSpentMoney = dayPlan.getMemos().stream().mapToInt(Memo::getSpentMoney).sum();
-        if (dayPlan.getLimitMoney() < totalSpentMoney) {
-            throw new CustomException("상한선 초과", HttpStatus.NOT_ACCEPTABLE);
-        }
-    }
-
-    public DayPlanResponseDTO saveDayPlan(DayPlanRequestDTO dayPlanRequestDTO) {
-        log.info("saveDayPlan");
-        log.info("memberId={}", dayPlanRequestDTO.getLimitMoney());
-        Member member = memberRepository.findById(dayPlanRequestDTO.get).get();
-        log.info("member nickname ={}", member.getNickname());
+    public DayPlanResponseDTO saveDayPlan(Principal principal, DayPlanRequestDTO dayPlanRequestDTO) {
+        String name = principal.getName();
+        Member member = memberRepository.findByUsername(name).get();
         DayPlan dayPlan = DayPlan.builder()
                 .date(dayPlanRequestDTO.getLocalDate())
                 .member(member)
