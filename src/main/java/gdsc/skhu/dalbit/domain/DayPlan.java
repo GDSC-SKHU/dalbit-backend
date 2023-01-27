@@ -1,10 +1,7 @@
 package gdsc.skhu.dalbit.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -13,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -35,4 +32,7 @@ public class DayPlan {
     @Column
     private int limitMoney;
 
+
+    @OneToMany(mappedBy = "dayPlan")
+    private List<Memo> memos = new ArrayList<>();
 }

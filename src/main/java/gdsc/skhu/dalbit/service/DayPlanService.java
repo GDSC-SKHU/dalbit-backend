@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.Id;
+import java.security.Principal;
 import java.time.LocalDate;
 import java.util.Optional;
 
@@ -34,11 +35,9 @@ public class DayPlanService {
         }
     }
 
-    public DayPlanResponseDTO saveDayPlan(DayPlanRequestDTO dayPlanRequestDTO) {
-        log.info("saveDayPlan");
-        log.info("memberId={}", dayPlanRequestDTO.getLimitMoney());
-        Member member = memberRepository.findById(dayPlanRequestDTO.getMemberId()).get();
-        log.info("member nickname ={}", member.getNickname());
+    public DayPlanResponseDTO saveDayPlan(Principal principal, DayPlanRequestDTO dayPlanRequestDTO) {
+        String name = principal.getName();
+        Member member = memberRepository.findByUsername(name).get();
         DayPlan dayPlan = DayPlan.builder()
                 .date(dayPlanRequestDTO.getLocalDate())
                 .member(member)
