@@ -1,24 +1,16 @@
 package gdsc.skhu.dalbit.service;
 
-import gdsc.skhu.dalbit.domain.DTO.DateCheckDTO;
 import gdsc.skhu.dalbit.domain.DTO.request.DayPlanRequestDTO;
 import gdsc.skhu.dalbit.domain.DTO.response.DayPlanResponseDTO;
 import gdsc.skhu.dalbit.domain.DayPlan;
 import gdsc.skhu.dalbit.domain.Member;
-import gdsc.skhu.dalbit.domain.Memo;
 import gdsc.skhu.dalbit.repository.DayPlanRepository;
 import gdsc.skhu.dalbit.repository.MemberRepository;
-import gdsc.skhu.dalbit.service.exception.CustomException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.Id;
 import java.security.Principal;
-import java.time.LocalDate;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
