@@ -5,7 +5,7 @@ import lombok.Getter;
 
 import java.time.LocalDate;
 @Getter
-public class AllMemosRequestDTO {
+public class FindDayPlanRequestDTO {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     LocalDate date;
 }
