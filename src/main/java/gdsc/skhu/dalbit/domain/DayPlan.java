@@ -17,7 +17,7 @@ import java.util.List;
 public class DayPlan {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
+    @Column(name = "dayplan_id", nullable = false)
     private Long id;
 
     @ManyToOne
@@ -31,7 +31,6 @@ public class DayPlan {
 
     @Column
     private int limitMoney;
-
 
     @OneToMany(mappedBy = "dayPlan")
     private List<Memo> memos = new ArrayList<>();

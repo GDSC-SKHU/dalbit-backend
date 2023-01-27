@@ -16,7 +16,7 @@ public class Memo {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "dayplan_id")
+    @JoinColumn(name = "dayplan_id", nullable = false)
     private DayPlan dayPlan;
 
     @Column
