@@ -1,17 +1,14 @@
 package gdsc.skhu.dalbit.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
+@Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 public class Memo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,8 +18,10 @@ public class Memo {
     @ManyToOne
     @JoinColumn(name = "dayplan_id")
     private DayPlan dayPlan;
+
     @Column
     private String message;
+
     @Column
     private int spentMoney;
 }
