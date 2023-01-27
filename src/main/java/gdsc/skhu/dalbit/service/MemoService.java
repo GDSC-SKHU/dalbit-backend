@@ -12,6 +12,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
+import java.time.LocalDate;
+import java.util.Locale;
+
 @Service
 @RequiredArgsConstructor
 public class MemoService {
@@ -20,17 +24,21 @@ public class MemoService {
     private final DayPlanRepository dayPlanRepository;
     private final MemberRepository memberRepository;
 
-    public void saveMemo(MemoRequestDTO memoRequestDTO) {
-        Member member = memberRepository.findById(memoRequestDTO.getMemberId()).get();
+    public void saveMemo(Principal principal,MemoRequestDTO memoRequestDTO) {
+        String name = principal.getName();
+        Member member = memberRepository.findByUsername(name).get();
         DayPlan dayPlan = dayPlanRepository.findByDateAndMember(memoRequestDTO.getDate(),member).orElseThrow(() -> new IllegalArgumentException());
-        Memo example = Memo.builder()
+        memoRepository.save(Memo.builder()
                 .dayPlan(dayPlan)
                 .message(memoRequestDTO.getMessage())
                 .spentMoney(memoRequestDTO.getSpentMoney())
-                .build();
-        memoRepository.save(example);
+                .build());
     }
 
-    public void findAllMemo() {
+    public void findAllMemo(Principal principal, LocalDate localDate) {
+        String name = principal.getName();
+        Member member = memberRepository.findByUsername(name).get();
+        DayPlan dayPlan = dayPlanRepository.findByDateAndMember(localDate, member).orElseThrow(() -> new IllegalArgumentException());
+
     }
 }

@@ -8,7 +8,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Locale;
 
 @RestController
 @RequestMapping("/api")
@@ -17,14 +20,14 @@ public class MemoController {
     private final MemoService memoService;
 
     @GetMapping("/memos")
-    public ResponseEntity<?> findAllMemo() {
-        memoService.findAllMemo();
+    public ResponseEntity<?> findAllMemo(Principal principal,@RequestBody LocalDate localDate) {
+        memoService.findAllMemo(principal,localDate);
         return ResponseEntity.ok("findAll");
     }
 
     @PostMapping("/memos")
-    public ResponseEntity<String> saveMemo(@RequestBody MemoRequestDTO memoRequestDTO) {
-        memoService.saveMemo(memoRequestDTO);
+    public ResponseEntity<String> saveMemo(Principal principal, @RequestBody MemoRequestDTO memoRequestDTO) {
+        memoService.saveMemo(principal,memoRequestDTO);
         return ResponseEntity.ok("저장성공");
     }
 }

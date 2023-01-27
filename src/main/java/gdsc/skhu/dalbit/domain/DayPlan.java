@@ -32,6 +32,7 @@ public class DayPlan {
     @Column
     private int limitMoney;
 
+
     @OneToMany(mappedBy = "dayPlan")
     private List<Memo> memos = new ArrayList<>();
 }
