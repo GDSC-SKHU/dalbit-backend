@@ -1,5 +1,6 @@
 package gdsc.skhu.dalbit.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -15,6 +16,7 @@ public class Memo {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "dayplan_id", nullable = false)
     private DayPlan dayPlan;
