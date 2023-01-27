@@ -34,20 +34,20 @@ public class DayPlanService {
         }
     }
 
-//    public DayPlanResponseDTO saveDayPlan(DayPlanRequestDTO dayPlanRequestDTO) {
-//        log.info("saveDayPlan");
-//        log.info("memberId={}", dayPlanRequestDTO.getLimitMoney());
-//        Member member = memberRepository.findById(dayPlanRequestDTO.get).get();
-//        log.info("member nickname ={}", member.getNickname());
-//        DayPlan dayPlan = DayPlan.builder()
-//                .date(dayPlanRequestDTO.getLocalDate())
-//                .member(member)
-//                .limitMoney(dayPlanRequestDTO.getLimitMoney())
-//                .build();
-//        dayPlanRepository.save(dayPlan);
-//        return DayPlanResponseDTO.builder()
-//                .localDate(dayPlanRequestDTO.getLocalDate())
-//                .limitMoney(dayPlan.getLimitMoney())
-//                .build();
-//    }
+    public DayPlanResponseDTO saveDayPlan(DayPlanRequestDTO dayPlanRequestDTO) {
+        log.info("saveDayPlan");
+        log.info("memberId={}", dayPlanRequestDTO.getLimitMoney());
+        Member member = memberRepository.findById(dayPlanRequestDTO.get).get();
+        log.info("member nickname ={}", member.getNickname());
+        DayPlan dayPlan = DayPlan.builder()
+                .date(dayPlanRequestDTO.getLocalDate())
+                .member(member)
+                .limitMoney(dayPlanRequestDTO.getLimitMoney())
+                .build();
+        dayPlanRepository.save(dayPlan);
+        return DayPlanResponseDTO.builder()
+                .localDate(dayPlanRequestDTO.getLocalDate())
+                .limitMoney(dayPlan.getLimitMoney())
+                .build();
+    }
 }
