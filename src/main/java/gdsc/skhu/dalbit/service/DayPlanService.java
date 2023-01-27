@@ -27,13 +27,6 @@ public class DayPlanService {
     private final DayPlanRepository dayPlanRepository;
     private final MemberRepository memberRepository;
 
-    public void checkLimitMoney(Long MemberId, LocalDate localDate, int limitMoney) {
-        DayPlan dayPlan = dayPlanRepository.findById(1L).orElseThrow(() -> new IllegalArgumentException());
-        int totalSpentMoney = dayPlan.getMemos().stream().mapToInt(Memo::getSpentMoney).sum();
-        if (dayPlan.getLimitMoney() < totalSpentMoney) {
-            throw new CustomException("상한선 초과", HttpStatus.NOT_ACCEPTABLE);
-        }
-    }
 
     public DayPlanResponseDTO saveDayPlan(Principal principal, DayPlanRequestDTO dayPlanRequestDTO) {
         String name = principal.getName();
@@ -49,4 +42,5 @@ public class DayPlanService {
                 .limitMoney(dayPlan.getLimitMoney())
                 .build();
     }
+
 }
