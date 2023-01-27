@@ -32,15 +32,7 @@ public class DayPlan {
     @Column
     private LocalDate date;
 
-
-
     @Column
     private int limitMoney;
-
-    @OneToMany
-    @JoinColumn(name = "dayplan_id")
-    private List<Memo> memos = new ArrayList<>();
-
-
 
 }
