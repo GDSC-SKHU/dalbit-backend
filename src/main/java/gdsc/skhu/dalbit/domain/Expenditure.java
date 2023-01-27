@@ -12,7 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class Expenditure {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 

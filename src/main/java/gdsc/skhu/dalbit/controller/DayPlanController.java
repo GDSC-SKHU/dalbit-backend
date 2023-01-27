@@ -15,7 +15,6 @@ import java.security.Principal;
 @RequiredArgsConstructor
 public class DayPlanController {
     private final DayPlanService dayPlanService;
-
     @GetMapping("/dayplans")
     public ResponseEntity<DayPlanResponseDTO> findDayPlan(Principal principal,@RequestBody FindDayPlanRequestDTO findDayPlanRequestDTO) {
         return ResponseEntity.ok(dayPlanService.findDayPlan(principal,findDayPlanRequestDTO));
@@ -24,5 +23,11 @@ public class DayPlanController {
     public ResponseEntity<String> saveDayPlan(Principal principal, @RequestBody DayPlanRequestDTO dayPlanRequestDTO) {
         dayPlanService.saveDayPlan(principal, dayPlanRequestDTO);
         return ResponseEntity.ok("저장되었습니다.");
+    }
+
+    @PatchMapping("/dayplans")
+    public ResponseEntity<DayPlanResponseDTO> updateDayPlan(Principal principal, @RequestBody DayPlanRequestDTO dayPlanRequestDTO) {
+        DayPlanResponseDTO dayPlanResponseDTO = dayPlanService.updateDayPlan(principal,dayPlanRequestDTO);
+        return ResponseEntity.ok(dayPlanResponseDTO);
     }
 }

@@ -1,6 +1,6 @@
 package gdsc.skhu.dalbit.service;
 
-import gdsc.skhu.dalbit.domain.DTO.request.MemoRequestDTO;
+import gdsc.skhu.dalbit.domain.DTO.request.ExpenditureRequestDTO;
 import gdsc.skhu.dalbit.domain.DayPlan;
 import gdsc.skhu.dalbit.domain.Member;
 import gdsc.skhu.dalbit.domain.Expenditure;
@@ -20,14 +20,14 @@ public class ExpenditureService {
     private final DayPlanRepository dayPlanRepository;
     private final MemberRepository memberRepository;
 
-    public void saveMemo(Principal principal,MemoRequestDTO memoRequestDTO) {
+    public void saveExpenditure(Principal principal, ExpenditureRequestDTO expenditureRequestDTO) {
         String name = principal.getName();
         Member member = memberRepository.findByUsername(name).get();
-        DayPlan dayPlan = dayPlanRepository.findByMemberAndLocalDate(member, memoRequestDTO.getDate()).orElseThrow(() -> new IllegalArgumentException());
+        DayPlan dayPlan = dayPlanRepository.findByMemberAndLocalDate(member, expenditureRequestDTO.getLocalDate()).orElseThrow(() -> new IllegalArgumentException());
         expenditureRepository.save(Expenditure.builder()
                 .dayPlan(dayPlan)
-                .message(memoRequestDTO.getMessage())
-                .spentMoney(memoRequestDTO.getSpentMoney())
+                .message(expenditureRequestDTO.getMessage())
+                .spentMoney(expenditureRequestDTO.getSpentMoney())
                 .build());
     }
 

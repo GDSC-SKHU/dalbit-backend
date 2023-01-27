@@ -1,6 +1,6 @@
 package gdsc.skhu.dalbit.controller;
 
-import gdsc.skhu.dalbit.domain.DTO.request.MemoRequestDTO;
+import gdsc.skhu.dalbit.domain.DTO.request.ExpenditureRequestDTO;
 import gdsc.skhu.dalbit.service.ExpenditureService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +14,9 @@ import java.security.Principal;
 public class ExpenditureController {
     private final ExpenditureService expenditureService;
 
-
-
-    @PostMapping("/memos")
-    public ResponseEntity<String> saveMemo(Principal principal, @RequestBody MemoRequestDTO memoRequestDTO) {
-        expenditureService.saveMemo(principal,memoRequestDTO);
+    @PostMapping("/expenditures")
+    public ResponseEntity<String> saveExpenditure(Principal principal, @RequestBody ExpenditureRequestDTO expenditureRequestDTO) {
+        expenditureService.saveExpenditure(principal, expenditureRequestDTO);
         return ResponseEntity.ok("저장하였습니다.");
     }
 }

@@ -17,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 public class DayPlan {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "dayplan_id", nullable = false)
     private Long id;
 
@@ -33,6 +33,9 @@ public class DayPlan {
 
     @Column
     private int limitMoney;
+
+    @Column
+    private int totalSpentMoney;
 
     @OneToOne(mappedBy = "dayPlan")
     private Record record;

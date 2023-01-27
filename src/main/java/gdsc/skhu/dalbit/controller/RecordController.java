@@ -16,6 +16,7 @@ import java.security.Principal;
 @RequiredArgsConstructor
 public class RecordController {
     private final RecordService recordService;
+
     @PostMapping("/records")
     public ResponseEntity<String> saveRecord(Principal principal, @RequestBody RecordRequestDto recordRequestDto) {
         recordService.saveRecord(principal,recordRequestDto);
