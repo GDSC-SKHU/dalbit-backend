@@ -7,17 +7,18 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Slf4j
 @RequiredArgsConstructor
 public class DayPlanController {
-    private DayPlanService dayPlanService;
+    private final DayPlanService dayPlanService;
 
     @PostMapping("/dayplans")
-    public ResponseEntity<DayPlanResponseDTO> saveDayPlan(DayPlanRequestDTO dayPlanRquestDTO) {
-        log.info("money={}", dayPlanRquestDTO.getLimitMoney());
-        return ResponseEntity.ok(dayPlanService.saveDayPlan(dayPlanRquestDTO));
+    public ResponseEntity<DayPlanResponseDTO> saveDayPlan(@RequestBody  DayPlanRequestDTO dayPlanRequestDTO) {
+        DayPlanResponseDTO dayPlanResponseDTO = dayPlanService.saveDayPlan(dayPlanRequestDTO);
+        return ResponseEntity.ok(dayPlanResponseDTO);
     }
 }

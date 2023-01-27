@@ -19,7 +19,7 @@ public class Memo {
     private Long id;
 
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "dayplan_id")
     private DayPlan dayPlan;
     @Column
     private String message;

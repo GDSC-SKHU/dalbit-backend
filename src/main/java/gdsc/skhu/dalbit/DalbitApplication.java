@@ -13,11 +13,6 @@ public class DalbitApplication {
 	@Autowired
 	MemberRepository memberRepository;
 
-	@PostConstruct
-	void init() {
-		Member 전홍영 = Member.builder().name("전홍영").build();
-		memberRepository.save(전홍영);
-	}
 	public static void main(String[] args) {
 		SpringApplication.run(DalbitApplication.class, args);
 	}

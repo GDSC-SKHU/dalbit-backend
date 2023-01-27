@@ -10,6 +10,7 @@ import gdsc.skhu.dalbit.repository.DayPlanRepository;
 import gdsc.skhu.dalbit.repository.MemberRepository;
 import gdsc.skhu.dalbit.service.exception.CustomException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -20,9 +21,11 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class DayPlanService {
     private final DayPlanRepository dayPlanRepository;
     private final MemberRepository memberRepository;
+
     public void checkLimitMoney(Long MemberId, LocalDate localDate, int limitMoney) {
         DayPlan dayPlan = dayPlanRepository.findById(1L).orElseThrow(() -> new IllegalArgumentException());
         int totalSpentMoney = dayPlan.getMemos().stream().mapToInt(Memo::getSpentMoney).sum();
@@ -32,7 +35,10 @@ public class DayPlanService {
     }
 
     public DayPlanResponseDTO saveDayPlan(DayPlanRequestDTO dayPlanRequestDTO) {
+        log.info("saveDayPlan");
+        log.info("memberId={}", dayPlanRequestDTO.getLimitMoney());
         Member member = memberRepository.findById(dayPlanRequestDTO.getMemberId()).get();
+        log.info("member nickname ={}", member.getNickname());
         DayPlan dayPlan = DayPlan.builder()
                 .date(dayPlanRequestDTO.getLocalDate())
                 .member(member)

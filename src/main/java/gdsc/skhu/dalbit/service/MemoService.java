@@ -20,7 +20,7 @@ public class MemoService {
     private final DayPlanRepository dayPlanRepository;
     private final MemberRepository memberRepository;
 
-    public MemoResponseDTO saveMemo(MemoRequestDTO memoRequestDTO) {
+    public void saveMemo(MemoRequestDTO memoRequestDTO) {
         Member member = memberRepository.findById(memoRequestDTO.getMemberId()).get();
         DayPlan dayPlan = dayPlanRepository.findByDateAndMember(memoRequestDTO.getDate(),member).orElseThrow(() -> new IllegalArgumentException());
         Memo example = Memo.builder()
@@ -29,9 +29,8 @@ public class MemoService {
                 .spentMoney(memoRequestDTO.getSpentMoney())
                 .build();
         memoRepository.save(example);
-        return MemoResponseDTO.builder()
-                .memos(dayPlan.getMemos())
-                .date(dayPlan.getDate())
-                .build();
+    }
+
+    public void findAllMemo() {
     }
 }

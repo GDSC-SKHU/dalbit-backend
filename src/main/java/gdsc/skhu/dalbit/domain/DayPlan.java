@@ -27,10 +27,11 @@ public class DayPlan {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @DateTimeFormat(pattern = "yyyy-mm-dd")
-    @JsonFormat(pattern = "yyyy-mm-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     @Column
     private LocalDate date;
+
 
 
     @Column
