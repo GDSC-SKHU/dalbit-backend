@@ -1,5 +1,6 @@
 package gdsc.skhu.dalbit.service;
 
+import gdsc.skhu.dalbit.domain.DTO.request.AllMemosRequestDTO;
 import gdsc.skhu.dalbit.domain.DTO.request.MemoRequestDTO;
 import gdsc.skhu.dalbit.domain.DTO.response.MemoResponseDTO;
 import gdsc.skhu.dalbit.domain.DayPlan;
@@ -27,7 +28,7 @@ public class MemoService {
     public void saveMemo(Principal principal,MemoRequestDTO memoRequestDTO) {
         String name = principal.getName();
         Member member = memberRepository.findByUsername(name).get();
-        DayPlan dayPlan = dayPlanRepository.findByDateAndMember(memoRequestDTO.getDate(),member).orElseThrow(() -> new IllegalArgumentException());
+        DayPlan dayPlan = dayPlanRepository.findByMemberAndLocalDate(member, memoRequestDTO.getDate()).orElseThrow(() -> new IllegalArgumentException());
         memoRepository.save(Memo.builder()
                 .dayPlan(dayPlan)
                 .message(memoRequestDTO.getMessage())
@@ -35,10 +36,4 @@ public class MemoService {
                 .build());
     }
 
-    public void findAllMemo(Principal principal, LocalDate localDate) {
-        String name = principal.getName();
-        Member member = memberRepository.findByUsername(name).get();
-        DayPlan dayPlan = dayPlanRepository.findByDateAndMember(localDate, member).orElseThrow(() -> new IllegalArgumentException());
-
-    }
 }

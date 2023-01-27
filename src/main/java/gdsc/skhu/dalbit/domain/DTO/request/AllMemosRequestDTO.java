@@ -5,9 +5,7 @@ import lombok.Getter;
 
 import java.time.LocalDate;
 @Getter
-public class MemoRequestDTO {
+public class AllMemosRequestDTO {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     LocalDate date;
-    String message;
-    int spentMoney;
 }

@@ -23,7 +23,7 @@ public class DayPlanService {
         String name = principal.getName();
         Member member = memberRepository.findByUsername(name).get();
         DayPlan dayPlan = DayPlan.builder()
-                .date(dayPlanRequestDTO.getLocalDate())
+                .localDate(dayPlanRequestDTO.getLocalDate())
                 .member(member)
                 .limitMoney(dayPlanRequestDTO.getLimitMoney())
                 .build();

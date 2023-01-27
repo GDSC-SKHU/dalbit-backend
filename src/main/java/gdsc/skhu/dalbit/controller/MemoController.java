@@ -1,5 +1,7 @@
 package gdsc.skhu.dalbit.controller;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import gdsc.skhu.dalbit.domain.DTO.request.AllMemosRequestDTO;
 import gdsc.skhu.dalbit.domain.DTO.request.MemoRequestDTO;
 import gdsc.skhu.dalbit.domain.DTO.response.MemoResponseDTO;
 import gdsc.skhu.dalbit.domain.Memo;
@@ -19,11 +21,7 @@ import java.util.Locale;
 public class MemoController {
     private final MemoService memoService;
 
-    @GetMapping("/memos")
-    public ResponseEntity<?> findAllMemo(Principal principal,@RequestBody LocalDate localDate) {
-        memoService.findAllMemo(principal,localDate);
-        return ResponseEntity.ok("findAll");
-    }
+
 
     @PostMapping("/memos")
     public ResponseEntity<String> saveMemo(Principal principal, @RequestBody MemoRequestDTO memoRequestDTO) {
