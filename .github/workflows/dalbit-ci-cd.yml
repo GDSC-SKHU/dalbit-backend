@@ -45,7 +45,7 @@ jobs:
         password: ${{secrets.DOCKER_PASSWORD}}
     
     - name: Build Docker image with Buildpack
-      run: ./gradlew bootBuildImage
+      run: ./gradlew bootBuildImage --imageName={{$secrets.DOCKER_REPOSITORY}}
       
     - name: Push Docker image to Dockerhub
       run: |
