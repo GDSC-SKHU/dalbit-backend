@@ -17,6 +17,6 @@ public class ExpenditureController {
     @PostMapping("/expenditures")
     public ResponseEntity<String> saveExpenditure(Principal principal, @RequestBody ExpenditureRequestDTO expenditureRequestDTO) {
         expenditureService.saveExpenditure(principal, expenditureRequestDTO);
-        return ResponseEntity.ok("저장하였습니다.");
+        return ResponseEntity.ok("Save expenditure success");
     }
 }
