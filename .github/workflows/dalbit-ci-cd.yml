@@ -49,4 +49,4 @@ jobs:
       
     - name: Push Docker image to Dockerhub
       run: |
-        docker push ${{secrets.DOCKER_REPOSITORY}}
+        docker push ${{secrets.DOCKER_USERNAME}}/${{secrets.DOCKER_REPOSITORY}}
