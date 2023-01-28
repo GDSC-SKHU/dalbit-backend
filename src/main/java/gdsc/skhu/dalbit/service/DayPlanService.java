@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -35,10 +36,10 @@ public class DayPlanService {
         dayPlanRepository.save(dayPlan);
     }
 
-    public DayPlanResponseDTO findDayPlan(Principal principal, FindDayPlanRequestDTO findDayPlanRequestDTO) {
+    public DayPlanResponseDTO findDayPlan(Principal principal, LocalDate localDate) {
         String username = principal.getName();
         Member member = memberRepository.findByUsername(username).get();
-        DayPlan dayPlan = dayPlanRepository.findByMemberAndLocalDate(member, findDayPlanRequestDTO.getLocalDate()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "day plan이 존재하지 않습니다."));
+        DayPlan dayPlan = dayPlanRepository.findByMemberAndLocalDate(member, localDate).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "day plan이 존재하지 않습니다."));
         return DayPlanResponseDTO.builder()
                 .dayPlan(dayPlan)
                 .build();
