@@ -9,16 +9,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
 public class DayPlanController {
     private final DayPlanService dayPlanService;
-    @GetMapping("/dayplans")
-    public ResponseEntity<DayPlanResponseDTO> findDayPlan(Principal principal,@RequestBody FindDayPlanRequestDTO findDayPlanRequestDTO) {
-        return ResponseEntity.ok(dayPlanService.findDayPlan(principal,findDayPlanRequestDTO));
+
+    @GetMapping("/dayplans/{localDate}")
+    public ResponseEntity<DayPlanResponseDTO> findDayPlan(Principal principal, @PathVariable(name = "localDate") String localDateString) {
+        LocalDate localDate = LocalDate.parse(localDateString, DateTimeFormatter.ISO_DATE);
+        return ResponseEntity.ok(dayPlanService.findDayPlan(principal, localDate));
     }
+
     @PostMapping("/dayplans")
     public ResponseEntity<String> saveDayPlan(Principal principal, @RequestBody DayPlanRequestDTO dayPlanRequestDTO) {
         dayPlanService.saveDayPlan(principal, dayPlanRequestDTO);

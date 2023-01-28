@@ -20,6 +20,6 @@ public class RecordController {
     @PostMapping("/records")
     public ResponseEntity<String> saveRecord(Principal principal, @RequestBody RecordRequestDto recordRequestDto) {
         recordService.saveRecord(principal,recordRequestDto);
-        return ResponseEntity.ok("저장되었습니다.");
+        return ResponseEntity.ok("Save record success");
     }
 }
